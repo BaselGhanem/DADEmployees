@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>موظف الشهر | دار الدواء</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Almarai:wght@400;700&display=swap');
+
+        :root {
+            --primary-color: #004d40;
+            --secondary-color: #4db6ac;
+            --accent-color: #ffb300;
+            --text-color-dark: #333;
+            --text-color-light: #f4f4f4;
+            --card-background: #fff;
+        }
+
+        body {
+            font-family: 'Almarai', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: var(--text-color-dark);
+            text-align: right;
+            direction: rtl;
+            background-image: url('https://images.pexels.com/photos/3201694/pexels-photo-3201694.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');
+            background-size: cover;
+            background-attachment: fixed;
+            background-position: center;
+        }
+
+        .header {
+            text-align: center;
+            padding: 2rem 1rem;
+            background-color: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(5px);
+            border-bottom: 2px solid var(--primary-color);
+        }
+
+        .company-logo {
+            width: 150px;
+            margin-bottom: 1rem;
+        }
+
+        h1 {
+            color: var(--primary-color);
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .tagline {
+            font-size: 1.2rem;
+            color: var(--text-color-dark);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 1rem;
+        }
+
+        .employees-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+            justify-content: center;
+        }
+
+        @media (max-width: 768px) {
+            .employees-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .employee-card {
+            background-color: var(--card-background);
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            padding: 1.5rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+
+        .employee-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+            clip-path: circle(0% at 50% 50%);
+            transition: clip-path 0.5s ease;
+            z-index: 1;
+        }
+
+        .employee-card:hover::before {
+            clip-path: circle(141.4% at 50% 50%);
+        }
+
+        .employee-card:hover {
+            transform: translateY(-10px) scale(1.03);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .card-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .employee-photo {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 5px solid var(--accent-color);
+            object-fit: cover;
+            margin-bottom: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .employee-card:hover .employee-photo {
+            border-color: #fff;
+        }
+
+        .employee-name,
+        .employee-title,
+        .employee-achievement,
+        .badge,
+        .social-share a svg {
+            transition: color 0.3s ease;
+        }
+
+        .employee-card:hover .employee-name,
+        .employee-card:hover .employee-title,
+        .employee-card:hover .employee-achievement,
+        .employee-card:hover .social-share a svg {
+            color: #fff !important;
+        }
+        
+        .employee-card:hover .employee-achievement,
+        .employee-card:hover .badge {
+            background-color: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            color: #fff !important;
+        }
+
+        .employee-name {
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            margin: 0.5rem 0;
+        }
+
+        .employee-title {
+            font-size: 1.1rem;
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        .employee-achievement {
+            background-color: var(--secondary-color);
+            color: #fff;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            display: inline-block;
+            margin-bottom: 1.5rem;
+        }
+
+        .badge {
+            background-color: var(--primary-color);
+            color: var(--accent-color);
+            font-weight: bold;
+            padding: 0.4rem 0.8rem;
+            border-radius: 5px;
+            font-size: 0.8rem;
+            margin: 0.2rem;
+            display: inline-block;
+        }
+
+        .motivational-message {
+            text-align: center;
+            background-color: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(5px);
+            padding: 2rem;
+            border-radius: 15px;
+            margin-top: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .motivational-message h2 {
+            color: var(--primary-color);
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .social-share {
+            margin-top: 1.5rem;
+        }
+
+        .social-share a {
+            display: inline-block;
+            margin: 0 0.5rem;
+            color: var(--primary-color);
+            font-size: 1.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .social-share a svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        /* Dynamic Card Colors */
+        .card-theme-1 { --primary-color: #004d40; --secondary-color: #4db6ac; }
+        .card-theme-2 { --primary-color: #d32f2f; --secondary-color: #ef5350; }
+        .card-theme-3 { --primary-color: #1976d2; --secondary-color: #42a5f5; }
+        .card-theme-4 { --primary-color: #6a1b9a; --secondary-color: #9c27b0; }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <img src="https://www.dadgroup.com/wp-content/uploads/2023/11/uplift-dad-website-05.png" alt="شعار دار الدواء" class="company-logo">
+        <h1>موظف الشهر (سبتمبر)</h1>
+        <p class="tagline">شكرًا لجهودكم المميزة التي تضيء طريق النجاح!</p>
+    </header>
+
+    <main class="container">
+        <div id="employees-container" class="employees-grid">
+        </div>
+
+        <div class="motivational-message">
+            <h2>شغفكم يصنع التميز!</h2>
+            <p>لجميع الموظفين: اجتهادكم اليوم هو أساس نجاحكم غداً. استمروا في تقديم أفضل ما لديكم، فجهودكم تقدّر وهي مصدر إلهام للجميع.</p>
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const employeesOfTheMonth = [
+                {
+                    name: "سارة محمود",
+                    title: "Medical Rep",
+                    photo: "https://images.pexels.com/photos/7552313/pexels-photo-7552313.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+                    achievement: "زيادة مبيعات المنطقة بنسبة 25%",
+                    badges: ["أسرع نمو", "رائد المبيعات"],
+                    theme: "card-theme-1"
+                },
+                {
+                    name: "أحمد علي",
+                    title: "Sales Supervisor",
+                    photo: "https://images.pexels.com/photos/3785104/pexels-photo-3785104.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+                    achievement: "قيادة الفريق لتحقيق أهداف الربع الثالث",
+                    badges: ["أداء الربع الثالث"],
+                    theme: "card-theme-2"
+                },
+                {
+                    name: "فاطمة يوسف",
+                    title: "Sales",
+                    photo: "https://images.pexels.com/photos/7710169/pexels-photo-7710169.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+                    achievement: "أفضل أداء في تحقيق أهداف المبيعات الشهرية",
+                    badges: ["المثابرة"],
+                    theme: "card-theme-3"
+                },
+                {
+                    name: "علي حسن",
+                    title: "Promotion Supervisor",
+                    photo: "https://images.pexels.com/photos/9301866/pexels-photo-9301866.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+                    achievement: "تطوير استراتيجية تسويق مبتكرة",
+                    badges: ["الموظف المبدع"],
+                    theme: "card-theme-4"
+                }
+            ];
+
+            const employeesContainer = document.getElementById('employees-container');
+
+            function createEmployeeCard(employee) {
+                const cardDiv = document.createElement('div');
+                cardDiv.classList.add('employee-card', employee.theme);
+                
+                // Base URLs for social media sharing
+                const shareUrls = {
+                    facebook: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}&quote=${encodeURIComponent(`تهانينا للموظف ${employee.name}!`)}`,
+                    linkedin: `https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent(window.location.href)}&title=${encodeURIComponent(`موظف الشهر: ${employee.name}`)}&summary=${encodeURIComponent(employee.achievement)}`,
+                    instagram: `https://www.instagram.com/share?url=${encodeURIComponent(window.location.href)}` // Note: Instagram sharing is limited for web
+                };
+
+                const cardContent = `
+                    <div class="card-content">
+                        <img src="${employee.photo}" alt="صورة ${employee.name}" class="employee-photo">
+                        <h3 class="employee-name">${employee.name}</h3>
+                        <p class="employee-title">${employee.title}</p>
+                        <div class="employee-achievement">${employee.achievement}</div>
+                        <div class="badges-container">
+                            ${employee.badges.map(badge => `<span class="badge">${badge}</span>`).join('')}
+                        </div>
+                        <div class="social-share">
+                            <a href="${shareUrls.facebook}" target="_blank" aria-label="مشاركة على فيسبوك">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm3 8h-1.35c-.538 0-.65.221-.65.778v1.222h2l-.209 2h-1.791v7h-3v-7h-2v-2h2v-2.195c0-1.789.932-2.75 3.02-2.75h1.98v3z"/></svg>
+                            </a>
+                            <a href="${shareUrls.linkedin}" target="_blank" aria-label="مشاركة على لينكد إن">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm-2 16h-2v-6h2v6zm-1-6.891c-.607 0-1.1-.496-1.1-1.109 0-.612.492-1.109 1.1-1.109s1.1.496 1.1 1.109c0 .613-.493 1.109-1.1 1.109zm8 6.891h-1.998v-3.061c0-1.071-.902-1.939-2-1.939s-2 .868-2 1.939v3.061h-2v-6h2v1.111c.325-.568.847-1.111 1.835-1.111 1.629 0 3.165 1.503 3.165 4.846v1.154z"/></svg>
+                            </a>
+                            <a href="${shareUrls.instagram}" target="_blank" aria-label="مشاركة على إنستغرام">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07c3.252.148 4.772 1.667 4.92 4.919.058 1.265.07 1.645.07 4.849 0 3.204-.012 3.584-.07 4.85-.148 3.252-1.667 4.772-4.919 4.92-1.266.058-1.645-.07-4.85-.07-3.204 0-3.584-.012-4.85-.07-3.252-.148-4.772-1.667-4.92-4.919-.058-1.265-.07-1.645-.07-4.85 0-3.204.012-3.584.07-4.85.148-3.252 1.667-4.772 4.919-4.92 1.265-.058 1.645-.07 4.85-.07zm0-2.163c-3.259 0-3.666.014-4.943.075-4.102.186-6.196 2.279-6.382 6.382-.061 1.277-.075 1.684-.075 4.945 0 3.26.014 3.666.075 4.945.186 4.102 2.279 6.196 6.382 6.382 1.277.061 1.684.075 4.943.075 3.26 0 3.666-.014 4.943-.075 4.102-.186 6.196-2.279 6.382-6.382.061-1.277.075-1.684.075-4.945 0-3.26-.014-3.666-.075-4.945-.186-4.102-2.279-6.196-6.382-6.382-1.277-.061-1.684-.075-4.943-.075zM12 8.835c-1.705 0-3.085 1.38-3.085 3.085s1.38 3.085 3.085 3.085 3.085-1.38 3.085-3.085-1.38-3.085-3.085-3.085zm0 5.085c-1.105 0-2-.896-2-2s.896-2 2-2 2 .896 2 2-.896 2-2 2zm6.406-7.514c-.58.118-1.18-.328-1.298-.908-.118-.58.328-1.18.908-1.298.58-.118 1.18.328 1.298.908.118.58-.328 1.18-.908 1.298z"/></svg>
+                            </a>
+                        </div>
+                    </div>
+                `;
+                cardDiv.innerHTML = cardContent;
+                employeesContainer.appendChild(cardDiv);
+            }
+
+            employeesOfTheMonth.forEach(employee => {
+                createEmployeeCard(employee);
+            });
+        });
+    </script>
+</body>
+</html>
